@@ -9,7 +9,14 @@ django.setup()
 from BlogApp.models import Post
 from CommentApp.models import Comment
 
+'''
+instance = Post(Title = 'testing', Content='This is content 1.', Category = 'category1')
+instance.save()
 
+category = Post.objects.filter(Category ='category1')
+print(category)
+
+'''
 #create
 
 instance = Post(Title='Title 1', Content='This is content 1.', Category = 'category1')
@@ -43,8 +50,8 @@ delete.save()
 
 #create
 
-p_instance1 = Post.objects.filter(Category ='category1')
-p_instance2 = Post.objects.filter(Category ='category2')
+p_instance1 = Post.objects.filter(Category ='category1')[0]
+p_instance2 = Post.objects.filter(Category ='category2')[0]
 
 c_instance = Comment(Content='This is content 1.', Author = 'author1', Post = p_instance1)
 c_instance.save()
@@ -57,7 +64,7 @@ c_instance3.save()
 
 #query
 
-category = Comment.objects.filter(Post = p_instance2)
+category = Comment.objects.filter(Post__Title__gt = p_instance2.Title)
 print(category)
 
 #update
@@ -72,3 +79,4 @@ update.save()
 delete = Comment.objects.get(Author='author3')
 
 delete.save()
+

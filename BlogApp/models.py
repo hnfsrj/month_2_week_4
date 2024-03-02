@@ -10,4 +10,4 @@ class Post(models.Model):
     Tags = ArrayField(models.CharField(max_length = 100), blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return self.Title
